@@ -8,7 +8,14 @@ Ces données sont présentes en quantité très limitée pour l'instant (quelque
 
 ### Prérequis
 
-Pytorch et torchvision doivent être installés. Suivre les instructions d'installation ici http://pytorch.org/
+Pytorch et torchvision doivent être installés. http://pytorch.org/
+
+## Instalation requirement
+
+1. pip install --user --upgrade numpy
+2. pip install --user http://download.pytorch.org/whl/torch-0.2.0.post3-cp27-none-macosx_10_7_x86_64.whl
+3. pip install --user torchvision
+4. pip install --user -r requirements.txt
 
 Pour entraîner un modèle de reconnaissance de caractères sur EMNIST:
 
@@ -27,6 +34,7 @@ python eval.py
 ### Instructions
 
 1. forker le repo
+1. *bis* installer les requirement
 2. ajouter l'URL du fork sur [ce document](https://docs.google.com/spreadsheets/d/1Jqwg_Q6kx909itz1_gIsi1VB3kOwg3caD83KCnUD1yU/edit#gid=0)
 3. coder! Le but est d'améliorer le score d'évaluation. Nous exécuterons un script d'évaluation similaire à `eval.py`, votre code doit donc contenir un fichier `predictor.py` avec une classe `Predictor`
 4. lorsque vous mettez à jour le repo, nous lançons automatiquement l'évaluation et mettons à jour le [leaderboard](http://54.166.222.173/)

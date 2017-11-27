@@ -13,10 +13,10 @@ import datasets
 parser = argparse.ArgumentParser(description='PyTorch MNIST Example')
 parser.add_argument('--batch-size', type=int, default=64, metavar='N',
                     help='input batch size for training (default: 64)')
-parser.add_argument('--test-batch-size', type=int, default=1000, metavar='N',
-                    help='input batch size for testing (default: 1000)')
-parser.add_argument('--epochs', type=int, default=10, metavar='N',
-                    help='number of epochs to train (default: 10)')
+parser.add_argument('--test-batch-size', type=int, default=100, metavar='N',
+                    help='input batch size for testing (default: 100)')
+parser.add_argument('--epochs', type=int, default=20, metavar='N',
+                    help='number of epochs to train (default: 20)')
 parser.add_argument('--lr', type=float, default=0.01, metavar='LR',
                     help='learning rate (default: 0.01)')
 parser.add_argument('--momentum', type=float, default=0.5, metavar='M',
@@ -54,6 +54,8 @@ test_loader = torch.utils.data.DataLoader(
 
 
 model = models.Net()
+model.linear()
+# model.conv2d()
 if args.cuda:
     model.cuda()
 
@@ -67,6 +69,7 @@ def train(epoch):
         data, target = Variable(data), Variable(target)
         optimizer.zero_grad()
         output = model(data)
+        # loss = nn.NLLLoss2d(output, target)
         loss = F.nll_loss(output, target)
         loss.backward()
         optimizer.step()
@@ -84,6 +87,7 @@ def test():
             data, target = data.cuda(), target.cuda()
         data, target = Variable(data, volatile=True), Variable(target)
         output = model(data)
+        # test_loss += nn.NLLLoss2d(output, target, size_average=False).data[0] # sum up batch loss
         test_loss += F.nll_loss(output, target, size_average=False).data[0] # sum up batch loss
         pred = output.data.max(1, keepdim=True)[1] # get the index of the max log-probability
         correct += pred.eq(target.data.view_as(pred)).cpu().sum()
